@@ -12,7 +12,7 @@ y(1) = 150;
 %% Model Function
 f = @(t, A) b-t*A(1);
 %% Order of Equation
-for alpha = 0.1:0.1:1.0
+alpha = 0.1;
 %% Scheme
 for i = 2:length(1)-1
     t(i+1) = t(i) + h;
@@ -20,17 +20,8 @@ for i = 2:length(1)-1
         + (f(t(i-1), A(i-1))/h*gamma(alpha))*((h/alpha)*t(i+1)^alpha - ((t(i+1)^(alpha+1))/(alpha+1)) + (t(i)^alpha)/(alpha+1)) ;
 end
 %% Grahpics
-tic;
 figure(1)
-txt = ['\alpha=' num2str(alpha)];
-plot(t, y, '-','displayname', txt, 'linewidth', 2 ); 
+plot(t, y, '-', 'linewidth', 2 ); 
 hold on
 xlabel('Time(Days)')
 ylabel('y(t)')
-lgd = legend;
-lgd.NumColumns = 2;
-title(lgd, 'Order of FDE, \alpha')
-axis tight
-toc;
-end
-
